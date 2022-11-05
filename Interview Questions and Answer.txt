@@ -1,0 +1,49 @@
+1) What is Loose Coupling?
+
+Loose coupling : In simple words, loose coupling means they are mostly independent. If the only knowledge that class A has about class B, is what class B has exposed through its interface, then class A and class B are said to be loosely coupled. In order to over come from the problems of tight coupling between objects, spring framework uses dependency injection mechanism with the help of POJO/POJI model and through dependency injection its possible to achieve loose coupling.
+Example : If you change your shirt, then you are not forced to change your body – when you can do that, then you have loose coupling. When you can’t do that, then you have tight coupling. The examples of Loose coupling are Interface, JMS.
+// Java program to illustrate 
+// loose coupling concept
+public interface Topic
+{
+    void understand();
+}
+class Topic1 implements Topic {
+	public void understand()
+    	{
+        	System.out.println("Got it");
+    	}
+} class Topic2 implements Topic {
+	public void understand()
+    	{
+        	System.out.println("understand");
+    	}
+}public class Subject {
+	public static void main(String[] args)
+    	{
+        	Topic t = new Topic1();
+        	t.understand();
+    	}
+}
+
+2) What is Dependency?
+
+A typical Java application will have three layers in its architecture: web, business and data.
+
+The web layer
+The business layer
+The data layer
+In the above scenario:
+
+Web Layer depends on Business Layer. The business layer is a dependency for the web layer.
+Business layer depends on Data Layer. The data layer is a dependency for the business layer.
+
+3) What is IOC (Inversion of Control)?
+In general, when a class depends on another class then the dependent class creates the object of its
+dependency class directly, and then uses(call) its methods, it is called the dependency object created in the main control.
+But if some external entity is taking care of creating the dependency object then we say that control is inverted to some external entity, this is called Inversion of Control (IOC).
+
+4) What is Dependency Injection?
+Dependency Injection is a fundamental aspect of the Spring framework, through which the Spring container “injects” objects into other objects or “dependencies”.
+
+Simply put, this allows for loose coupling of components and moves the responsibility of managing components onto the container.
