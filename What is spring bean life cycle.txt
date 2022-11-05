@@ -1,0 +1,9 @@
+The Spring Bean lifecycle has numerous steps such as initialization, running, and destroy. We can perform our custom task in between these phases for testing/debugging or other utility purposes.
+
+For example, if we want to perform some tasks at the start of the bean and some clean up related tasks at the end, we can do that at the bean initialization or before destroying the bean object, respectively. It makes the application more functional and easier to debug as well.
+
+Spring has two interfaces, InitializingBean and DisposableBean, that contains several utility methods to perform the tasks during the bean lifecycle.
+
+To perform the initializing task, we can use afterPropertiesSet() method of the InitializingBean interface similarly for cleaning resources. Before destroying the bean object, we can use the destroy() method of the DisposableBean interface.
+
+Let’s start with running examples.
