@@ -62,9 +62,10 @@ Autowiring can't be used to inject primitive and string values. It works with re
 
 7) What are the important roles of an IOC Container?
 	The IoC container is responsible to instantiate, configure and assemble the objects. The IoC container gets informations from the XML file and works 		accordingly. The main tasks performed by IoC container are:
-	to instantiate the application class
-	to configure the object
-	to assemble the dependencies between the objects
+	1) to instantiate the application class
+	2) to configure the object
+	3) to assemble the dependencies between the objects
+	
 	There are two types of IoC containers. They are:
 
 	BeanFactory
