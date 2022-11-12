@@ -99,3 +99,18 @@ Autowiring can't be used to inject primitive and string values. It works with re
 	ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 	
 	
+9) 	Can you compare Bean Factory with Application Context?
+
+	BeanFactory loads beans on-demand, while ApplicationContext loads all beans at startup. Thus, BeanFactory is lightweight as compared to ApplicationContext. 	    Let's understand it with an example.
+	
+	public class Student {
+    public static boolean isBeanInstantiated = false;
+
+    public void postConstruct() {
+        setBeanInstantiated(true);
+    }
+}
+
+10) How do you create an application context with Spring?
+
+
