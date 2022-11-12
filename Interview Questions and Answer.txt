@@ -51,4 +51,13 @@ Simply put, this allows for loose coupling of components and moves the responsib
 5) Can you give few examples of Dependency Injection ?
 Example Car Class might need a reference to an Engine class . These required classe are called dependencies and in the example the car class is dependent on having an instance of the  engine class to run.
 
+6) What is Auto Wiring?
+Autowiring feature of spring framework enables you to inject the object dependency implicitly. It internally uses setter or constructor injection.
+Autowiring can't be used to inject primitive and string values. It works with reference only.
+1)	no:-		It is the default autowiring mode. It means no autowiring bydefault.
+2)	byName:-	The byName mode injects the object dependency according to name of the bean. In such case, property name and bean name must be same. It 			internally calls setter method.
+3)	byType:-	The byType mode injects the object dependency according to type. So property name and bean name can be different. It internally calls setter 			     method.
+4)	constructor:-	The constructor mode injects the dependency by calling the constructor of the class. It calls the constructor having large number of 				parameters.
+5)	autodetect:-	It is deprecated since Spring 3.
+
 
