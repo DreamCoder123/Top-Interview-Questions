@@ -70,3 +70,31 @@ Autowiring can't be used to inject primitive and string values. It works with re
 	BeanFactory
 	ApplicationContext
 
+8) 	What are Bean Factory and Application Context?
+	Spring Framework provides two of the most fundamental and important packages, they are the org.springframework.beans and org.springframework.context packages. 		Code in these packages provides the basis for Spring’s Inversion of Control/Dependency Injection features. Spring containers are responsible for creating bean 		objects and injecting them into the classes. The two containers are namely,
+
+	BeanFactory(I) – Available in org.springframework.beans.factory package.
+	ApplicationContext(I) – Available in rg.springframework.context package.
+	
+	The BeanFactory Interface
+	This is the root interface for accessing a Spring bean container. It is the actual container that instantiates, configures, and manages a number of beans. 	   These beans collaborate with one another and thus have dependencies between themselves. These dependencies are reflected in the configuration data used by the 	  BeanFactory. This interface is implemented by the objects that hold a number of bean definitions, each uniquely identified by a String name. The most common 	         implementation class used for this BeanFactory is XmlBeanFactory available in org.springframework.beans.factory.xml package. 
+
+
+	Note: BeanFactory is deprecated from Spring 3.0.
+
+	Example code:
+	ClassPathResource resource = new ClassPathResource("beans.xml");
+	XmlBeanFactory factory = new XmlBeanFactory(resource);
+ 
+ 
+
+	The ApplicationContext Interface
+ 
+
+	This interface is designed on top of the BeanFactory interface. The ApplicationContext interface is the advanced container that enhances BeanFactory 		functionality in a more framework-oriented style. While the BeanFactory provides basic functionality for managing and manipulating beans, often in a 		programmatic way, the ApplicationContext provides extra functionality like MessageSource, Access to resources, Event propagation to beans, Loading of multiple 		(hierarchical) contexts etc. There are so many implementation classes that can be used such as ClassPathXmlApplicationContext,FileSystemXmlApplicationContext, 		AnnotationConfigWebApplicationContext etc.
+
+
+	Example code:
+	ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+	
+	
