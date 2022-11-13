@@ -261,3 +261,9 @@ XML application context:
 Specific multiple packages:
 
 <context:component-scan base-package="com.in28minutes.package1, com.in28minutes.package2" />
+
+
+Q12 What is a component scan?
+When developing Spring Boot applications, you need to tell the Spring Framework where to look for Spring components. Using component scan is one method of asking Spring to detect Spring managed components. Spring needs the information to locate and register all the Spring components with the application context when the application starts.
+
+Spring can auto scan, detect, and instantiate components from pre-defined project packages. It can auto scan all classes annotated with the stereotype annotations @Component, @Controller, @Service, and @Repository
