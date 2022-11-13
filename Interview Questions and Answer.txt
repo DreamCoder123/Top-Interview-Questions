@@ -113,4 +113,68 @@ Autowiring can't be used to inject primitive and string values. It works with re
 
 10) How do you create an application context with Spring?
 
+Step 1: Creating a Spring Project using Spring Initializer as pictorially depicted below.
+
+
+
+Step 2: Create Student class under com.gfg.demo.domain and AppConfig class under com.gfg.demo.config packages. The AppConfig is the configuration class that contains all the Java beans configured using Java Based Configuration. The Student class is the POJO class.
+
+Class 1: AppConfig class
+@Configuration
+
+// Class
+public class AppConfig {
+
+  @Bean
+
+  // Method
+  public Student student() {
+
+    return new Student(1, "Geek");
+  }
+}
+Class 2: Student class
+// Class
+public class Student {
+
+  // member variables
+  private int id;
+  private String name;
+
+  // Constructor 1
+  public Student() {}
+
+  // Constructor 2
+  public Student(int id, String name) {
+    this.id = id;
+    this.name = name;
+  }
+
+  // Method of this class
+  // @Override
+  public String toString() {
+
+    return "Student{" + "id=" + id + ", name='" + name + '\'' + '}';
+  }
+}
+Step 3: Now the Main Application class at the root contains the creation of a container.
+
+// Class
+// @SpringBootApplication
+public class DemoApplication {
+
+  // Main driver method
+  public static void main(String[] args) {
+
+    // SpringApplication.run(DemoApplication.class, args);
+
+    // Creating its object
+    ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+    Student student = context.getBean(Student.class);
+
+    // Print and display
+    System.out.println(student);
+  }
+}
+Step 4: The SpringApplication.run() method is provided by default in the main class when the SpringBoot project is created. It creates the container, creates beans, manages dependency injection and life cycle of those beans. This is done using @SpringBootApplication annotation.
 
