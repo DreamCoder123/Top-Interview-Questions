@@ -178,3 +178,86 @@ public class DemoApplication {
 }
 Step 4: The SpringApplication.run() method is provided by default in the main class when the SpringBoot project is created. It creates the container, creates beans, manages dependency injection and life cycle of those beans. This is done using @SpringBootApplication annotation.
 
+
+Q11 How does Spring know where to search for Components or Beans?
+
+
+If you understand Component Scan, you understand Spring.
+
+Spring is a dependency injection framework. It is all about beans and wiring in dependencies.
+
+The first step of defining Spring Beans is by adding the right annotation — @Component or @Service or @Repository.
+
+However, Spring does not know about the bean unless it knows where to search for it.
+
+This part of “telling Spring where to search” is called a Component Scan.
+
+You define the packages that have to be scanned.
+
+Once you define a Component Scan for a package, Spring would search the package and all its sub packages for components/beans.
+
+Defining a Component Scan
+
+If you are using Spring Boot, check the configuration in Approach 1.
+If you are doing a JSP/Servlet or a Spring MVC application without using Spring Boot, use Approach 2.
+Approach 1: Component Scan in a Spring Boot Project
+
+If your other package hierarchies are below your main app with the @SpringBootApplication annotation, you’re covered by the implicit Component Scan. If there are beans/components in other packages that are not sub-packages of the main package, you should manually add them as @ComponentScan
+
+Consider below class
+
+package com.in28minutes.springboot.basics.springbootin10steps;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
+@SpringBootApplication
+public class SpringbootIn10StepsApplication {
+    public static void main(String[] args) {
+        ApplicationContext applicationContext =
+            SpringApplication.run(SpringbootIn10StepsApplication.class, args);
+        for (String name: applicationContext.getBeanDefinitionNames()) {
+            System.out.println(name);
+        }
+    }
+}
+@SpringBootApplication is defined in the SpringbootIn10StepsApplication class which is in the package com.in28minutes.springboot.basics.springbootin10steps
+
+@SpringBootApplication defines an automatic Component Scan on the package com.in28minutes.springboot.basics.springbootin10steps.
+
+You are fine if all your components are defined in the above package or a sub-package of it.
+
+However, let’s say one of the components is defined in package com.in28minutes.springboot.somethingelse
+
+In this case, you would need to add the new package into Component Scan.
+
+You have two options:
+
+Option 1:
+
+@ComponentScan(“com.in28minutes.springboot”)
+@SpringBootApplication
+public class SpringbootIn10StepsApplication {...}
+Option 2:: Define as array
+
+@ComponentScan({"com.in28minutes.springboot.basics.springbootin10steps","com.in28minutes.springboot.somethingelse"})
+@SpringBootApplication
+public class SpringbootIn10StepsApplication {...}
+Approach 2: Non-Spring Boot Project
+
+Option 1:
+
+@ComponentScan(“com.in28minutes)
+@Configuration
+public class SpringConfiguration {...}
+Option 2:
+
+@ComponentScan({"com.in28minutes.package1","com.in28minutes.package2"})
+@Configuration
+public class SpringConfiguration {...}
+XML application context:
+
+<context:component-scan base-package="com.in28minutes" />
+Specific multiple packages:
+
+<context:component-scan base-package="com.in28minutes.package1, com.in28minutes.package2" />
