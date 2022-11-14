@@ -461,3 +461,90 @@ Webscoket Scope
 
 When first accessed, WebSocket scoped beans are stored in the WebSocket session attributes. The same instance of the bean is then returned whenever that bean is accessed during the entire WebSocket session.
 We can also say that it exhibits singleton behavior, but limited to a WebSocket session only.
+
+
+Q21 How is Spring’s singleton bean different from Gang of Four Singleton Pattern?
+
+Spring Singleton is very different from Singleton pattern. Spring guarantees to create only one bean instance for given bean id definition per container.Singleton pattern ensures that one and only one instance is created per ClassLoader. 
+
+Q22 What are the different types of dependency
+Spring provides an IoC container which is responsible for instantiating, configuring and managing the lifecycle of Spring beans. In Spring, any POJO is referred to as a Spring bean.
+
+The Spring ApplicationContext interface represents its IoC container and we have several implementation classes available. Some of these include ClassPathXmlApplicationContext, FileSystemXmlApplicationContext, and WebApplicationContext.
+
+Let’s instantiate the Spring container using ClassPathXmlApplicationContext:
+ApplicationContext appContext 
+  = new ClassPathXmlApplicationContext("applicationContext.xml");
+
+Here, the applicationContext.xml is the file that holds the metadata required to assemble beans at runtime.
+Spring supports three types of dependency injection:
+
+1. Constructor-Based Injection:
+In a constructor-based injection, Spring will use the matching constructor to resolve and inject the dependency.
+
+We can either configure the beans in applicationContext.xml:
+<bean id="address" class="com.programmergirl.domain.Address"/>
+<bean id="person" class="com.programmergirl.domain.Person">
+    <constructor-arg ref="address"/>
+</bean>
+
+Or, we can enable the <component-scan/> in our applicationContext.xml:
+<context:component-scan base-package="com.programmergirl.domain" />
+
+On enabling component scan, we can make the Spring configurations using the annotations. Our classes would then look like:
+package com.programmergirl.domain;
+@Component
+public class Person {
+    private Address address;
+    @Autowired
+    public Person(Address address) {
+        this.address = address;
+    }
+}
+package com.programmergirl.domain;
+@Component
+public class Address {
+   ...
+}
+
+Spring, by default, wires the beans by their type. If there are more than one beans of the same type, we can use @Qualifier annotation to reference a bean by its name:
+@Component
+public class Person {
+    private Address address;
+    @Autowired
+    @Qualifier("address1")
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+}
+
+Assuming we have two Address beans – address1 and address2, our address1 bean will be injected into Person class while dependency resolution.
+2. Setter Injection:
+Setter-based dependency injection is achieved through the setter method on the bean after instantiating it using a no-arg constructor or no-argument static factory.
+
+We can configure it using XML as:
+<bean id="address" class="com.programmergirl.domain.Address"/>
+<bean id="person" class="com.programmergirl.domain.Person">
+    <property name="address" ref="address"/>
+</bean>
+
+On the other hand, when using annotations, we’ll have:
+@Component
+public class Person {
+    
+    private Address address;
+    ...
+    @Autowired
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+    
+}
+3. Property-Based Injection:
+We can also inject dependencies using fields or properties of a class. To do so, we can simply use the @Autowired annotation over the field:
+@Component
+public class Person {
+    @Autowired
+    private Address address;
+    ...
+}
