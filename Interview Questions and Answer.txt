@@ -431,3 +431,33 @@ The default scope for the bean is a singleton, like the example below, in which 
 Q19	Are Spring beans thread safe?
 	Is Spring singleton thread safe? The short answer is: no, it isn't. And you probably already know why. It's because of the long life cycle of singleton beans.
 
+
+Q20  What are the other scopes available?
+
+singleton.
+prototype.
+request.
+session.
+application.
+websocket.
+
+Singleton
+When we define a bean with the singleton scope, the container creates a single instance of that bean; all requests for that bean name will return the same object, which is cached. Any modifications to the object will be reflected in all references to the bean. This scope is the default value if no other scope is specified.
+
+Prototype
+A bean with the prototype scope will return a different instance every time it is requested from the container. It is defined by setting the value prototype to the @Scope annotation in the bean definition:
+
+Request & Session 
+The request scope creates a bean instance for a single HTTP request, while the session scope creates a bean instance for an HTTP Session.
+The application scope creates the bean instance for the lifecycle of a ServletContext, and the websocket scope creates it for a particular WebSocket session.
+
+Application scope
+The application scope creates the bean instance for the lifecycle of a ServletContext.
+
+This is similar to the singleton scope, but there is a very important difference with regards to the scope of the bean.
+When beans are application scoped, the same instance of the bean is shared across multiple servlet-based applications running in the same ServletContext, while singleton scoped beans are scoped to a single application context only.
+
+Webscoket Scope
+
+When first accessed, WebSocket scoped beans are stored in the WebSocket session attributes. The same instance of the bean is then returned whenever that bean is accessed during the entire WebSocket session.
+We can also say that it exhibits singleton behavior, but limited to a WebSocket session only.
