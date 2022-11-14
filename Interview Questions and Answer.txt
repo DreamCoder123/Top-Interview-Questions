@@ -421,3 +421,13 @@ We mark beans with @Service to indicate that they're holding the business logic.
 In this article, we learned about the differences between the @Component, @Repository, and @Service annotations. We examined each annotation separately to understand their areas of use.
 
 In conclusion, it's always a good idea to choose the annotation based on their layer conventions.
+
+
+Q18  what is the default scope of a bean?
+
+The default scope for the bean is a singleton, like the example below, in which we haven't explicitly given a scope. Singleton means that the Spring container creates only one instance of the bean, and cached in memory, and all the requests for that bean will return a shared reference to the same bean.
+
+
+Q19	Are Spring beans thread safe?
+	Is Spring singleton thread safe? The short answer is: no, it isn't. And you probably already know why. It's because of the long life cycle of singleton beans.
+
