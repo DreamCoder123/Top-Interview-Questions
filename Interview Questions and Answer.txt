@@ -379,3 +379,45 @@ Q16 What does @Autowired signify?
 The @Autowired annotation provides more fine-grained control over where and how autowiring should be accomplished. The @Autowired annotation can be used to autowire bean on the setter method just like @Required annotation, constructor, a property or methods with arbitrary names and/or multiple arguments.
 
 
+Q17 What’s the difference Between @Controller,@Component, @Repository, and @Service	
+Annotations in Spring?
+
+The major difference between these stereotypes is that they are used for different classifications. When we annotate a class for auto-detection, we should use the respective stereotype.
+
+Now let's go through them in more detail.
+
+1)  @Controller
+The @Controller annotation indicates that a particular class serves the role of a controller. Spring Controller annotation is typically used in combination with annotated handler methods based on the @RequestMapping annotation. It can be applied to classes only. It’s used to mark a class as a web request handler. 
+
+2) @Component
+We can use @Component across the application to mark the beans as Spring's managed components. Spring will only pick up and register beans with @Component, and doesn't look for @Service and @Repository in general.
+
+They are registered in ApplicationContext because they are annotated with @Component:
+
+@Component
+public @interface Service {
+}
+Copy
+@Component
+public @interface Repository {
+}
+Copy
+@Service and @Repository are special cases of @Component. They are technically the same, but we use them for the different purposes.
+
+3) @Repository
+@Repository’s job is to catch persistence-specific exceptions and re-throw them as one of Spring’s unified unchecked exceptions.
+
+For this, Spring provides PersistenceExceptionTranslationPostProcessor, which we are required to add in our application context (already included if we're using Spring Boot):
+
+<bean class=
+  "org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+Copy
+This bean post processor adds an advisor to any bean that’s annotated with @Repository.
+
+4) @Service
+We mark beans with @Service to indicate that they're holding the business logic. Besides being used in the service layer, there isn't any other special use for this annotation.
+
+4 Conclusion
+In this article, we learned about the differences between the @Component, @Repository, and @Service annotations. We examined each annotation separately to understand their areas of use.
+
+In conclusion, it's always a good idea to choose the annotation based on their layer conventions.
