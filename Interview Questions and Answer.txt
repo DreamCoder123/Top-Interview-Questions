@@ -267,3 +267,49 @@ Q12 What is a component scan?
 When developing Spring Boot applications, you need to tell the Spring Framework where to look for Spring components. Using component scan is one method of asking Spring to detect Spring managed components. Spring needs the information to locate and register all the Spring components with the application context when the application starts.
 
 Spring can auto scan, detect, and instantiate components from pre-defined project packages. It can auto scan all classes annotated with the stereotype annotations @Component, @Controller, @Service, and @Repository
+
+
+Q13 How do you define a component scan in XML and
+Java Configurations?
+
+To autodetect these classes and register the corresponding beans, you need to include the following element in XML, where the base-package element is a common parent package for the two classes. (Alternatively, you can specify a comma-separated list that includes the parent package of each class.)
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+               
+     <context:component-scan base-package="org.example"/>
+     
+</beans>
+
+
+With Spring, we use the @ComponentScan annotation along with the @Configuration annotation to specify the packages that we want to be scanned. @ComponentScan without arguments tells Spring to scan the current package and all of its sub-packages.
+
+Let's say we have the following @Configuration in com.baeldung.componentscan.springapp package:
+
+
+freestar
+@Configuration
+@ComponentScan
+public class SpringComponentScanApp {
+    private static ApplicationContext applicationContext;
+
+    @Bean
+    public ExampleBean exampleBean() {
+        return new ExampleBean();
+    }
+
+    public static void main(String[] args) {
+        applicationContext = 
+          new AnnotationConfigApplicationContext(SpringComponentScanApp.class);
+
+        for (String beanName : applicationContext.getBeanDefinitionNames()) {
+            System.out.println(beanName);
+        }
+    }
+}
