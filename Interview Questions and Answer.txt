@@ -550,7 +550,10 @@ public class Person {
 }
 
 
-Problem 23	What is setter injection?
+Q23 What is setter injection?
+
+Setter Dependency Injection (SDI): This is the simpler of the two DI methods. In this, the DI will be injected with the help of setter and/or getter methods. Now to set the DI as SDI in the bean, it is done through the bean-configuration file For this, the property to be set with the SDI is declared under the <property> tag in the bean-config file.
+
 Problem 24	What is constructor injection?
 Problem 25	How do you choose between setter and constructor injections?
 Problem 26	What are the different options available to create
