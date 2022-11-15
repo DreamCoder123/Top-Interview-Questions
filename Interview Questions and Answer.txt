@@ -548,3 +548,83 @@ public class Person {
     private Address address;
     ...
 }
+
+
+Problem 23	What is setter injection?
+Problem 24	What is constructor injection?
+Problem 25	How do you choose between setter and constructor injections?
+Problem 26	What are the different options available to create
+Application Contexts for Spring?	
+Problem 27	What is the difference between XML and Java
+Configurations for Spring?	
+Problem 28	How do you choose between XML and Java
+Configurations for Spring?	
+Problem 29	How does Spring do Autowiring?
+Problem 30	What are the different kinds of matching used by
+Spring for Autowiring?	
+Problem 31	How do you debug problems with Spring
+Framework? (NoUniqueBeanDefinitionException NoSuchBeanDefinitionException)	
+Problem 22	What is @Primary?
+Problem 23	What is @Qualifier?
+Problem 24	What is CDI (Contexts and Dependency Injection)?
+Problem 25	What is Model 1 architecture ?
+Problem 26	What is Model 2 architecture ?
+Problem 27	What is Model 2 Front Controller architecture?
+Problem 28	Can you show an example controller method in
+Spring MVC?	
+Problem 29	Can you explain a simple flow in Spring MVC?
+Problem 30	What is a ViewResolver?
+Problem 31	Model vs ModelView
+Problem 32	What is a RequestMapping?
+Problem 33	What is Dispatcher Servlet?
+Problem 34	How do you set up Dispatcher Servlet?
+Problem 35	What is a form backing object?
+Problem 36	How is validation done using Spring MVC?
+Problem 37	What is BindingResult?
+Problem 38	How do you map validation results to your view?
+Problem 39	What are Spring Form Tags ?
+Problem 40	What is a Path Variable?
+Problem 41	What is a Model Attribute?
+Problem 42	What is a Session Attribute?
+Spring JDBC & JPA
+Problem	Questions
+Problem 1	What is Spring JDBC? How is different from JDBC?
+Problem 2	What is a JdbcTemplate?
+Problem 3	What is a RowMapper?
+Problem 4	What is JPA?
+Problem 5	What is Hibernate?
+Problem 6	How do you define an entity in JPA?
+Problem 7	What is an Entity Manager?
+Problem 8	What is a Persistence Context?
+Problem 9	How do you map relationships in JPA?
+Problem 10	What are the different types of relationships in JPA?
+Problem 11	How do you define One to One Mapping in JPA?
+Problem 12	How do you define One to Many Mapping in JPA?
+Problem 13	How do you define Many to Many Mapping in JPA?
+Problem 14	How do you define a datasource in a Spring Context?
+Problem 15	What is the use of persistence.xml
+Problem 16	How do you configure Entity Manager Factory and
+Transaction Manager?	
+Problem 17	How do you define transaction management for
+Spring – Hibernate integration?	
+Problem 18	What is Spring Data?
+Problem 19	What is the need for Spring Data?
+Problem 20	What is Spring Data JPA?
+Problem 21	What is a CrudRepository?
+Problem 22	What is a PagingAndSortingRepository?
+Notes
+
+Exceptional Handling & Versioning
+Problem	Questions
+Problem 1	How do you implement Exception Handling for
+RESTFul Web Services?	
+Problem 2	What are the different error status that you would
+return in RESTful Web Services?	
+Problem 3	How would you implement them using Spring Boot?
+Problem 4	How do you handle Validation Errors with RESTful
+Web Services?	
+Problem 5	Why do we need Versioning for RESTful Web
+Services?	
+Problem 6	What are the versioning options that are available?
+Problem 7	How do you implement Versioning for RESTful Web
+Services?
