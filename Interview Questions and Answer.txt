@@ -651,6 +651,7 @@ StudentService studentService = context.getBean("studentService", StudentService
 Q27	What is the difference between XML and Java Configurations for Spring?	
 
 
+
 Problem 28	How do you choose between XML and Java
 Configurations for Spring?	
 Problem 29	How does Spring do Autowiring?
