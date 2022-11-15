@@ -554,12 +554,103 @@ Q23 What is setter injection?
 
 Setter Dependency Injection (SDI): This is the simpler of the two DI methods. In this, the DI will be injected with the help of setter and/or getter methods. Now to set the DI as SDI in the bean, it is done through the bean-configuration file For this, the property to be set with the SDI is declared under the <property> tag in the bean-config file.
 
-Problem 24	What is constructor injection?
-Problem 25	How do you choose between setter and constructor injections?
-Problem 26	What are the different options available to create
-Application Contexts for Spring?	
-Problem 27	What is the difference between XML and Java
-Configurations for Spring?	
+Q24 What is constructor injection?
+
+Constructor Dependency Injection (CDI): In this, the DI will be injected with the help of constructors. Now to set the DI as CDI in bean, it is done through the bean-configuration file For this, the property to be set with the CDI is declared under the <constructor-arg> tag in the bean-config file.
+
+Q25  How do you choose between setter and constructor injections?
+
+When to use Setter Injection and when to use Constructor Injection?
+If there is only one property in a spring bean class then use constructor injection as constructor executes before methods constructor injection will be faster than setter injection. 
+
+If spring bean class is having more than one property then it is better to use setter injection because it reduces burden on the programmer. Setter injection reduces burden on the programmer because programmer need not to worry about index, type of parameters as in the case of constructor injection. 
+
+It is not mandatory that all properties must be configured for injection. Properties can be left with their default values. 
+
+
+Q26 What are the different options available to create Application Contexts for Spring?	
+	
+ApplicationContext Implementation Classes
+
+There are different types of Application containers provided by Spring for different requirements as listed below which later onwards are described alongside with declaration, at lastly providing an example to get through the implementation part with the pictorial aids. Containers are as follows:
+
+
+AnnotationConfigApplicationContext container 
+AnnotationConfigWebApplicationContext
+XmlWebApplicationContext
+Container 1: AnnotationConfigApplicationContext
+
+AnnotationConfigApplicationContext class was introduced in Spring 3.0. It accepts classes annotated with @Configuration, @Component, and JSR-330 compliant classes. The constructor of AnnotationConfigApplicationContext accepts one or more classes. For example, in the below declaration, two Configuration classes Appconfig and AppConfig1 are passed as arguments to the constructor. The beans defined in later classes will override the same type and name beans in earlier classes when passed as arguments. For example, AppConfig and AppConfig1 have the same bean declaration. The bean defined in AppConfig1 overrides the bean in AppConfig.
+
+Syntax: Declaration
+
+ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class, AppConfig1.class);
+Note: Add the following to the properties file in the IDE to allow the spring to override beans.
+
+spring.main.allow-bean-definition-overriding=true
+Container 2: AnnotationConfigWebApplicationContext
+
+AnnotationConfigWebApplicationContext class was introduced in Spring 3.0. It is similar to AnnotationConfigApplicationContext for a web environment. It accepts classes annotated with @Configuration, @Component, and JSR-330 compliant classes. These classes can be registered via register() method or passing base packages to scan() method. This class may be used when we configure ContextLoaderListener servlet listener or a DispatcherServlet in a web.xml. From Spring 3.1, this class can be instantiated and injected to DispatcherServlet using java code by implementing WebApplicationInitializer, an alternative to web.xml.
+
+Example 
+
+// Class
+// Implementing WebApplicationInitializer
+public class MyWebApplicationInitializer implements WebApplicationInitializer {
+
+  // Servlet container
+
+  public void onStartup(ServletContext container) throws ServletException {
+    AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
+    context.register(AppConfig.class);
+    context.setServletContext(container);
+
+    // Servlet configuration
+  }
+}
+Container 3: XmlWebApplicationContext
+
+Spring MVC Web-based application can be configured completely using XML or Java code. Configuring this container is similar to the AnnotationConfigWebApplicationContext container, which implies we can configure it in web.xml or using java code.
+
+
+// Class
+// Implementing WebApplicationInitializer
+public class MyXmlWebApplicationInitializer implements WebApplicationInitializer {
+
+  // Servlet container
+  public void onStartup(ServletContext container) throws ServletException {
+    XmlWebApplicationContext context = new XmlWebApplicationContext();
+    context.setConfigLocation("/WEB-INF/spring/applicationContext.xml");
+    context.setServletContext(container);
+
+    // Servlet configuration
+  }
+}
+Container 4: FileSystemXmlApplicationContext
+
+FileSystemXmlApplicationContext is used to load XML-based Spring Configuration files from the file system or from URL. We can get the application context using Java code. It is useful for standalone environments and test harnesses. The following code shows how to create a container and use the XML as metadata information to load the beans.
+
+Illustration:
+
+String path = "Documents/demoProject/src/main/resources/applicationcontext/student-bean-config.xml";
+
+ApplicationContext context = new FileSystemXmlApplicationContext(path);
+AccountService accountService = context.getBean("studentService", StudentService.class);
+Container 5: ClassPathXmlApplicationContext
+
+FileSystemXmlApplicationContext is used to load XML-based Spring Configuration files from the classpath. We can get the application context using Java code. It is useful for standalone environments and test harnesses. The following code shows how to create a container and use the XML as metadata information to load the beans.
+
+Illustration:
+
+ApplicationContext context = new ClassPathXmlApplicationContext("applicationcontext/student-bean-config.xml");
+StudentService studentService = context.getBean("studentService", StudentService.class);
+
+
+
+
+Q27	What is the difference between XML and Java Configurations for Spring?	
+
+
 Problem 28	How do you choose between XML and Java
 Configurations for Spring?	
 Problem 29	How does Spring do Autowiring?
