@@ -649,7 +649,13 @@ StudentService studentService = context.getBean("studentService", StudentService
 
 
 Q27	What is the difference between XML and Java Configurations for Spring?	
+Spring Framework is most popular Java IOC framework. The core features of Spring Framework - IOC/Dependency Injection - are provided by Application Context. (Basic version is the Bean Factory)
 
+Application Context (and Bean Factory) takes care of the bean life cycle and wiring up dependencies other than a host of other features.
+
+Spring Beans can be defined in XML and Java Configurations. We would want to be able to load both these configurations from an Application Context.
+
+In this guide, we look at how to load beans from XML and Java configuration files into an application context in a Spring Boot Application.
 
 
 Problem 28	How do you choose between XML and Java
