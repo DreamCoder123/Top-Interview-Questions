@@ -661,6 +661,17 @@ In this guide, we look at how to load beans from XML and Java configuration file
 Problem 28	How do you choose between XML and Java
 Configurations for Spring?	
 Problem 29	How does Spring do Autowiring?
+
+The Spring framework enables automatic dependency injection. In other words, by declaring all the bean dependencies in a Spring configuration file, Spring container can autowire relationships between collaborating beans. This is called Spring bean autowiring.
+
+To use Java-based configuration in our application, let's enable annotation-driven injection to load our Spring configuration:
+
+@Configuration
+@ComponentScan("com.baeldung.autowire.sample")
+public class AppConfig {}
+
+
+
 Problem 30	What are the different kinds of matching used by
 Spring for Autowiring?	
 Problem 31	How do you debug problems with Spring
