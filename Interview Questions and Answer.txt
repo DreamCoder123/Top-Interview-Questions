@@ -681,8 +681,49 @@ byType: The byType mode injects the object dependency according to type. So it c
 constructor: The constructor mode injects the dependency by calling the constructor of the class. It calls the constructor having large number of parameters.
 autodetect: In this mode, Spring first tries to autowire by constructor. If this fails, it tries to autowire by using byType.
 
-Problem 31	How do you debug problems with Spring
-Framework? (NoUniqueBeanDefinitionException NoSuchBeanDefinitionException)	
+Problem 31	How do you debug problems with Spring Framework? (NoUniqueBeanDefinitionException NoSuchBeanDefinitionException)	
+
+The most common cause of this exception is simply trying to inject a bean that isn't defined.
+
+For example, BeanB is wiring in a collaborator, BeanA:
+
+@Component
+public class BeanA {
+
+    @Autowired
+    private BeanB dependency;
+    //...
+}
+Copy
+Now if the dependency BeanB is not defined in the Spring Context, the bootstrap process will fail with the no such bean definition exception:
+
+org.springframework.beans.factory.NoSuchBeanDefinitionException: 
+No qualifying bean of type [com.baeldung.packageB.BeanB]
+  found for dependency: 
+expected at least 1 bean which qualifies as
+  autowire candidate for this dependency. 
+Dependency annotations: 
+  {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+Copy
+The reason is clearly indicated by Spring: expected at least 1 bean which qualifies as autowire candidate for this dependency.
+
+One reason BeanB may not exist in the context — if beans are picked up automatically by classpath scanning, and if BeanB is correctly annotated as a bean (@Component, @Repository, @Service, @Controller, etc.) — is that it may be defined in a package that is not scanned by Spring:
+
+package com.baeldung.packageB;
+@Component
+public class BeanB { ...}
+Copy
+And the classpath scanning may be configured as follows:
+
+@Configuration
+@ComponentScan("com.baeldung.packageA")
+public class ContextWithJavaConfig {
+    ...
+}
+Copy
+If beans are not automatically scanned but instead defined manually, then BeanB is simply not defined in the current Spring Context.
+
+
 Problem 22	What is @Primary?
 Problem 23	What is @Qualifier?
 Problem 24	What is CDI (Contexts and Dependency Injection)?
