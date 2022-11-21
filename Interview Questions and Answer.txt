@@ -674,6 +674,13 @@ public class AppConfig {}
 
 Problem 30	What are the different kinds of matching used by
 Spring for Autowiring?	
+
+no: It’s the default autowiring mode. It means no autowiring.
+byName: The byName mode injects the object dependency according to name of the bean. In such case, property name and bean name should be same. It internally calls setter method.
+byType: The byType mode injects the object dependency according to type. So it can have different property name and bean name. It internally calls setter method.
+constructor: The constructor mode injects the dependency by calling the constructor of the class. It calls the constructor having large number of parameters.
+autodetect: In this mode, Spring first tries to autowire by constructor. If this fails, it tries to autowire by using byType.
+
 Problem 31	How do you debug problems with Spring
 Framework? (NoUniqueBeanDefinitionException NoSuchBeanDefinitionException)	
 Problem 22	What is @Primary?
