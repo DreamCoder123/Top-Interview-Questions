@@ -730,6 +730,23 @@ Spring @Primary annotation is used to give a higher preference to the marked bea
 
 Spring, by default, auto-wires by type. And so, when Spring attempts to autowire and there are multiple beans of the same type, we’ll get a NoUniqueBeanDefinitionException:
 
+To solve this, we can choose to use Spring @Primary annotation, thereby marking one bean to be the primary one.
+
+@Configuration
+public class UniversityConfig {
+ 
+    @Bean
+    @Primary
+    public Person student() {
+        return new Student();
+    }
+ 
+    @Bean
+    public Person teacher() {
+        return new Teacher();
+    }
+}
+
 Problem 23	What is @Qualifier?
 Problem 24	What is CDI (Contexts and Dependency Injection)?
 Problem 25	What is Model 1 architecture ?
