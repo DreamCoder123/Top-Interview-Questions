@@ -830,8 +830,118 @@ Please write comments if you find anything incorrect, or you want to share more 
 
 
 Q28	Can you show an example controller method in Spring MVC?	
+	Spring Controller
+	Spring Controller annotation can be applied on classes only. It’s used to mark a class as a web request handler. It’s mostly used with Spring MVC application.	      Let’s create a simple spring application where we will implement standard MVC controller as well as REST controller. Create a “Dynamic Web Project” in Eclipse and then convert it to Maven project. This will provide us with maven based web application structure and we can build our application on top of it. Below image shows the final project structure of our Spring MVC Controller application.
+	<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-webmvc</artifactId>
+	<version>5.0.7.RELEASE</version>
+</dependency>
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-web</artifactId>
+	<version>5.0.7.RELEASE</version>
+</dependency>
 
-Problem 29	Can you explain a simple flow in Spring MVC?
+<!-- Jackson for REST -->
+<dependency>
+	<groupId>com.fasterxml.jackson.core</groupId>
+	<artifactId>jackson-databind</artifactId>
+	<version>2.9.6</version>
+</dependency>
+Let’s look at the deployment descriptor (web.xml) where we will configure DispatcherServlet servlet as the front controller.
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xmlns="https://xmlns.jcp.org/xml/ns/javaee" 
+ xsi:schemaLocation="https://xmlns.jcp.org/xml/ns/javaee https://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>Spring-Controller</display-name>
+  <!-- Add Spring MVC DispatcherServlet as front controller -->
+	<servlet>
+        <servlet-name>spring</servlet-name>
+        <servlet-class>
+                org.springframework.web.servlet.DispatcherServlet
+        </servlet-class>
+        <init-param>
+       		<param-name>contextConfigLocation</param-name>
+       		<param-value>/WEB-INF/spring-servlet.xml</param-value>
+    		</init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+ 
+    <servlet-mapping>
+        <servlet-name>spring</servlet-name>
+        <url-pattern>/</url-pattern> 
+    </servlet-mapping>
+</web-app>
+Finally, we have following spring context file. Here we are configuring our application to be annotation-based and providing root package for scanning spring components. We are also configuring InternalResourceViewResolver bean and providing details of view pages.
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="https://www.springframework.org/schema/mvc"
+	xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xmlns:beans="https://www.springframework.org/schema/beans"
+	xmlns:context="https://www.springframework.org/schema/context"
+	xsi:schemaLocation="https://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		https://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		https://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<context:component-scan base-package="com.journaldev.spring" />
+
+	<!-- Resolves views selected for rendering by @Controllers to JSP resources 
+		in the /WEB-INF/views directory -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+
+</beans:beans>
+Our configuration XML files are ready, let’s move on to the Controller class now.
+
+package com.journaldev.spring.controller;
+
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class HomeController {
+
+	@GetMapping("/hello")
+	public String home(Locale locale, Model model) {
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		String formattedDate = dateFormat.format(date);
+		model.addAttribute("serverTime", formattedDate);
+		return "home";
+	}
+
+}
+We have defined a single request handler method, it’s accepting GET requests with URI “/hello” and returning “home.jsp” page as the response. Notice that we are setting an attribute to the model, which will be used in the home.jsp page. Here is our simple home.jsp page code.
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<html>
+<head>
+<title>Home</title>
+</head>
+<body>
+	<h1>Hello world!</h1>
+
+	<p>The time on the server is ${serverTime}.</p>
+
+</body>
+</html>
+Spring MVC Controller Test
+Our conventional servlet based Spring MVC application with a simple controller is ready, just export it as the WAR file and deploy on Tomcat or any other servlet container. Then go to URL https://localhost:8080/Spring-Controller/hello and you should see the following screen as output.
+
+
+Q29	Can you explain a simple flow in Spring MVC?
 Problem 30	What is a ViewResolver?
 Problem 31	Model vs ModelView
 Problem 32	What is a RequestMapping?
