@@ -942,6 +942,17 @@ Our conventional servlet based Spring MVC application with a simple controller i
 
 
 Q29	Can you explain a simple flow in Spring MVC?
+	Spring MVC is a Java framework that is used to develop web applications. It is built on a Model-View-Controller (MVC) pattern and possesses all the basic features of a spring framework, such as Dependency Injection, Inversion of Control. The architectural design of a Spring MVC can be used to develop flexible web applications. It basically separates the different aspects of the application, like input logic, UI logic, and business logic. 
+	Spring is an open-source that was created to resolve the complexity of an enterprise application development. It has a layered architecture that helps the developers to select the components which can be further used while providing a cohesive framework for the process of application development. Spring framework is flexible as it supports and can be integrated with various technologies like:
+
+It supports the REST style of web services.
+Supports transactional management
+The developer can interact with different databases.
+Can be integrated with Object Relationship frameworks, for instance, iBatis
+Containers can resolve the required dependencies as it supports Dependency Integration.
+The following article will clear all your doubts about what is Spring MVC, Spring MVC full form and the importance of Spring MVC in Java. Furthermore, it will also shed some light on the differences between Spring MVC and Spring Boot and why the former is preferred over the latter.
+
+
 Problem 30	What is a ViewResolver?
 Problem 31	Model vs ModelView
 Problem 32	What is a RequestMapping?
