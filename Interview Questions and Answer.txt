@@ -752,6 +752,10 @@ Q23	What is @Qualifier?
 There may be a situation when you create more than one bean of the same type and want to wire only one of them with a property. In such cases, you can use the @Qualifier annotation along with @Autowired to remove the confusion by specifying which exact bean will be wired. Following is an example to show the use of @Qualifier annotation.
 
 Q24	What is CDI (Contexts and Dependency Injection)?
+
+	CDI (Contexts and Dependency Injection) is a standard dependency injection framework included in Java EE 6 and higher.
+It allows us to manage the lifecycle of stateful components via domain-specific lifecycle contexts and inject components (services) into client objects in a type-safe way.
+
 Problem 25	What is Model 1 architecture ?
 Problem 26	What is Model 2 architecture ?
 Problem 27	What is Model 2 Front Controller architecture?
