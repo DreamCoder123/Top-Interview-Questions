@@ -1015,7 +1015,8 @@ DispatcherServlet acts as the Front Controller for Spring-based web applications
 
 
 Q 34	How do you set up Dispatcher Servlet?
-	etting Up Dispatcher Servlet
+	
+	Setting Up Dispatcher Servlet
 Now let’s see how can we set up DispatcherServlet in our Spring MVC project.  
 
 Note: We are going to use Spring Tool Suite 4 IDE for this project. Please refer to this article to install STS in your local machine How to Download and Install Spring Tool Suite (Spring Tools 4 for Eclipse) IDE? 
@@ -1052,7 +1053,11 @@ Now let’s tell this servlet, hey servlet you have to handle all the requests c
 So this does mean that the servlet “frontcontroller-dispatcher” is going to handle all the requests starting from student.com/anything, that may be student.com/save or student.com/get, anything. But it must start with student.com. So we are done with creating a Dispatcher Servlet. 
 
 
-Problem 35	What is a form backing object?
+Q35	What is a form backing object?
+
+	Form Backing Object/Command Object
+This is a POJO that is used to collect all information on a form.  It contains data only.  It is also called a Command Object in some Spring tutorials.  For example, an add a new car form page will have a Car form backing object with attribute data such as Year, Make and Model.  You'll notice that it contains the same attributes as a domain object, thus typically, your domain object can double as a form backing object.
+
 Problem 36	How is validation done using Spring MVC?
 Problem 37	What is BindingResult?
 Problem 38	How do you map validation results to your view?
