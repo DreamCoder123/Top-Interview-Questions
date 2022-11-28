@@ -953,7 +953,23 @@ Containers can resolve the required dependencies as it supports Dependency Integ
 The following article will clear all your doubts about what is Spring MVC, Spring MVC full form and the importance of Spring MVC in Java. Furthermore, it will also shed some light on the differences between Spring MVC and Spring Boot and why the former is preferred over the latter.
 
 
-Problem 30	What is a ViewResolver?
+Q 30	What is a ViewResolver?
+	Spring MVC is a Web MVC Framework for building web applications. In generic all MVC frameworks provide a way of working with views. Spring does that via the ViewResolvers, which enables you to render models in the browser without tying the implementation to specific view technology. Now let’s understand ViewResolver with an example project in STS. 
+
+The Spring MVC framework is comprised of the following components:
+
+Model: A model can be an object or collection of objects which basically contains the data of the application.
+View: A view is used for displaying the information to the user in a specific format. Spring supports various technologies like freemarker, velocity, and thymeleaf.
+Controller: It contains the logical part of the application. @Controller annotation is used to mark that class as controller.
+Front Controller: It remains responsible for managing the flow of the web application. DispatcherServlet acts as a front controller in Spring MVC.
+Requirements: Prior to it, certain requirements are needed that are as follows:  
+
+Eclipse (EE version)/STS IDE
+Spring JAR Files
+Tomcat Apache latest version
+
+
+
 Problem 31	Model vs ModelView
 Problem 32	What is a RequestMapping?
 Problem 33	What is Dispatcher Servlet?
