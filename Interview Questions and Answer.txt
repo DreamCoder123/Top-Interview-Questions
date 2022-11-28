@@ -1005,8 +1005,12 @@ public class LoginViewModel
     public String Password { get; set; }  
     public String RePassword { get; set; }  
 }
-Problem 32	What is a RequestMapping?
-Problem 33	What is Dispatcher Servlet?
+Q 32	What is a RequestMapping?
+	One of the most important annotations in spring is the @RequestMapping Annotation which is used to map HTTP requests to handler methods of MVC and REST controllers. In Spring MVC applications, the DispatcherServlet (Front Controller) is responsible for routing incoming HTTP requests to handler methods of controllers. When configuring Spring MVC, you need to specify the mappings between the requests and handler methods. To configure the mapping of web requests, we use the @RequestMapping annotation. The @RequestMapping annotation can be applied to class-level and/or method-level in a controller. The class-level annotation maps a specific request path or pattern onto a controller. You can then apply additional method-level annotations to make mappings more specific to handler methods. So let’s understand @RequestMapping Annotation at Method-level and Class level by examples. 
+	
+	
+Q 33	What is Dispatcher Servlet?
+	
 Problem 34	How do you set up Dispatcher Servlet?
 Problem 35	What is a form backing object?
 Problem 36	How is validation done using Spring MVC?
