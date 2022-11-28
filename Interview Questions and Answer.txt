@@ -1014,7 +1014,44 @@ Q 33	What is Dispatcher Servlet?
 DispatcherServlet acts as the Front Controller for Spring-based web applications. So now what is Front Controller? So it is pretty simple. Any request is going to come into our website the front controller is going to stand in front and is going to accept all the requests and once the front controller accepts that request then this is the job of the front controller that it will make a decision that who is the right controller to handle that request. For example, refer to the below image. Suppose we have a website called student.com and the client is make a request to save student data by hitting the following URL student.com/save and its first come to the front controller and once the front controller accepts that request it is going to assign to the Controller_1 as this controller handle the request for /save operation. Then it is going to return back the response to the Client. 
 
 
-Problem 34	How do you set up Dispatcher Servlet?
+Q 34	How do you set up Dispatcher Servlet?
+	etting Up Dispatcher Servlet
+Now let’s see how can we set up DispatcherServlet in our Spring MVC project.  
+
+Note: We are going to use Spring Tool Suite 4 IDE for this project. Please refer to this article to install STS in your local machine How to Download and Install Spring Tool Suite (Spring Tools 4 for Eclipse) IDE? 
+
+Step 1: Create a Dynamic Web Project in your STS IDE. You may refer to this article to create a Dynamic Web Project in STS: How to Create a Dynamic Web Project in Spring Tool Suite?
+
+Step 2: Download the spring JARs file from this link and go to the src > main > webapp > WEB-INF > lib folder and past these JAR files. 
+
+Step 3: Refer to this article Configuration of Apache Tomcat Server and configure the tomcat server with your application. Now we are ready to go.
+
+Step 4: Now go to the src > main > webapp > WEB-INF > web.xml file and here we have to configure our front controller inside a <servlet>…</servlet> tag something like this. 
+
+<servlet>
+
+      <!-- Provide a Servlet Name -->
+    <servlet-name>frontcontroller-dispatcher</servlet-name>
+    
+    <!-- Provide a fully qualified path to the DispatcherServlet class -->
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    
+
+</servlet>
+Now let’s tell this servlet, hey servlet you have to handle all the requests coming to our website called student.com (for this example). So the way we are going to tell the above servlet is we can write something like this
+
+<servlet-mapping>
+
+      <!-- Provide a Servlet Name that you want to map -->
+    <servlet-name>frontcontroller-dispatcher</servlet-name>
+    
+    <!-- Provide a url pattern -->
+    <url-pattern>/student.com/*</url-pattern>
+    
+</servlet-mapping>
+So this does mean that the servlet “frontcontroller-dispatcher” is going to handle all the requests starting from student.com/anything, that may be student.com/save or student.com/get, anything. But it must start with student.com. So we are done with creating a Dispatcher Servlet. 
+
+
 Problem 35	What is a form backing object?
 Problem 36	How is validation done using Spring MVC?
 Problem 37	What is BindingResult?
