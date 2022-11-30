@@ -1111,7 +1111,10 @@ Q40	What is a Path Variable?
 
 	Simply put, the @PathVariable annotation can be used to handle template variables in the request URI mapping, and set them as method parameters.
 	
-Problem 41	What is a Model Attribute?
+Q 41	What is a Model Attribute?
+	@ModelAttribute is an annotation that binds a method parameter or method return value to a named model attribute, and then exposes it to a web view.
+In this tutorial, we'll demonstrate the usability and functionality of this annotation through a common concept, a form submitted from a company's employee.
+
 Problem 42	What is a Session Attribute?
 Spring JDBC & JPA
 Problem	Questions
