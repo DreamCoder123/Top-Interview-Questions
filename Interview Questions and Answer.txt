@@ -1107,7 +1107,10 @@ form:hidden	This tag is used to generate the hidden input field.
 The form tag
 The Spring MVC form tag is a container tag. It is a parent tag that contains all the other tags of the tag library. This tag generates an HTML form tag and exposes a binding path to the inner tags for binding.
 
-Problem 40	What is a Path Variable?
+Q40	What is a Path Variable?
+
+	Simply put, the @PathVariable annotation can be used to handle template variables in the request URI mapping, and set them as method parameters.
+	
 Problem 41	What is a Model Attribute?
 Problem 42	What is a Session Attribute?
 Spring JDBC & JPA
