@@ -1077,7 +1077,10 @@ Let's see some frequently used validation annotations.
 @Pattern	It determines that the sequence follows the specified regular expression.
 
 
-Problem 37	What is BindingResult?
+Q37	What is BindingResult?
+
+	 BindingResult ] is Spring's object that holds the result of the validation and binding and contains errors that may have occurred. The BindingResult must come right after the model object that is validated or else Spring will fail to validate the object and throw an exception.
+	 
 Problem 38	How do you map validation results to your view?
 Problem 39	What are Spring Form Tags ?
 Problem 40	What is a Path Variable?
