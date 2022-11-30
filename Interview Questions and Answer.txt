@@ -1115,9 +1115,12 @@ Q 41	What is a Model Attribute?
 	@ModelAttribute is an annotation that binds a method parameter or method return value to a named model attribute, and then exposes it to a web view.
 In this tutorial, we'll demonstrate the usability and functionality of this annotation through a common concept, a form submitted from a company's employee.
 
-Problem 42	What is a Session Attribute?
-Spring JDBC & JPA
-Problem	Questions
+Q 42	What is a Session Attribute? 
+	The session attribute indicates whether or not the JSP page uses HTTP sessions. A value of true means that the JSP page has access to a builtin session object and a value of false means that the JSP page cannot access the builtin session object.
+
+Following directive allows the JSP page to use any of the builtin object session methods such as session.getCreationTime() or session.getLastAccessTime() −
+
+	Spring JDBC & JPA Problem	Questions
 Problem 1	What is Spring JDBC? How is different from JDBC?
 Problem 2	What is a JdbcTemplate?
 Problem 3	What is a RowMapper?
