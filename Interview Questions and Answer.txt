@@ -1081,8 +1081,32 @@ Q37	What is BindingResult?
 
 	 BindingResult ] is Spring's object that holds the result of the validation and binding and contains errors that may have occurred. The BindingResult must come right after the model object that is validated or else Spring will fail to validate the object and throw an exception.
 	 
-Problem 38	How do you map validation results to your view?
-Problem 39	What are Spring Form Tags ?
+Q 38	How do you map validation results to your view?
+
+Q39	What are Spring Form Tags ?
+	
+	The Spring MVC form tags are the configurable and reusable building blocks for a web page. These tags provide JSP, an easy way to develop, read and maintain.
+
+The Spring MVC form tags can be seen as data binding-aware tags that can automatically set data to Java object/bean and also retrieve from it. Here, each tag provides support for the set of attributes of its corresponding HTML tag counterpart, making the tags familiar and easy to use.
+
+Configuration of Spring MVC Form Tag
+The form tag library comes under the spring-webmvc.jar. To enable the support for form tag library, it is required to reference some configuration. So, add the following directive at the beginning of the JSP page:
+
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>  
+List of Spring MVC Form Tags
+
+Form Tag	Description
+form:form	It is a container tag that contains all other form tags.
+form:input	This tag is used to generate the text field.
+form:radiobutton	This tag is used to generate the radio buttons.
+form:checkbox	This tag is used to generate the checkboxes.
+form:password	This tag is used to generate the password input field.
+form:select	This tag is used to generate the drop-down list.
+form:textarea	This tag is used to generate the multi-line text field.
+form:hidden	This tag is used to generate the hidden input field.
+The form tag
+The Spring MVC form tag is a container tag. It is a parent tag that contains all the other tags of the tag library. This tag generates an HTML form tag and exposes a binding path to the inner tags for binding.
+
 Problem 40	What is a Path Variable?
 Problem 41	What is a Model Attribute?
 Problem 42	What is a Session Attribute?
