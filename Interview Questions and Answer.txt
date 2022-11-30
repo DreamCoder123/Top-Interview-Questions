@@ -1058,7 +1058,25 @@ Q35	What is a form backing object?
 	Form Backing Object/Command Object
 This is a POJO that is used to collect all information on a form.  It contains data only.  It is also called a Command Object in some Spring tutorials.  For example, an add a new car form page will have a Car form backing object with attribute data such as Year, Make and Model.  You'll notice that it contains the same attributes as a domain object, thus typically, your domain object can double as a form backing object.
 
-Problem 36	How is validation done using Spring MVC?
+Q36	How is validation done using Spring MVC?
+	
+	The Spring MVC Validation is used to restrict the input provided by the user. To validate the user's input, the Spring 4 or higher version supports and use Bean Validation API. It can validate both server-side as well as client-side applications.
+
+Bean Validation API
+The Bean Validation API is a Java specification which is used to apply constraints on object model via annotations. Here, we can validate a length, number, regular expression, etc. Apart from that, we can also provide custom validations.
+
+As Bean Validation API is just a specification, it requires an implementation. So, for that, it uses Hibernate Validator. The Hibernate Validator is a fully compliant JSR-303/309 implementation that allows to express and validate application constraints.
+
+Validation Annotations
+Let's see some frequently used validation annotations.
+
+@NotNull	It determines that the value can't be null.
+@Min	It determines that the number must be equal or greater than the specified value.
+@Max	It determines that the number must be equal or less than the specified value.
+@Size	It determines that the size must be equal to the specified value.
+@Pattern	It determines that the sequence follows the specified regular expression.
+
+
 Problem 37	What is BindingResult?
 Problem 38	How do you map validation results to your view?
 Problem 39	What are Spring Form Tags ?
