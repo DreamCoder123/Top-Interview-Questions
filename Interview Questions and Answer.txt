@@ -1121,8 +1121,21 @@ Q 42	What is a Session Attribute?
 Following directive allows the JSP page to use any of the builtin object session methods such as session.getCreationTime() or session.getLastAccessTime() −
 
 	Spring JDBC & JPA Problem	Questions
-Problem 1	What is Spring JDBC? How is different from JDBC?
-Problem 2	What is a JdbcTemplate?
+Q1	What is Spring JDBC? How is different from JDBC?
+		
+	Spring provides a simplification in handling database access with the Spring JDBC Template. The Spring JDBC Template has the following advantages 		compared with standard JDBC.
+	
+The Spring JDBC template allows to clean-up the resources automatically, e.g. release the database connections.
+
+The Spring JDBC template converts the standard JDBC SQLExceptions into RuntimeExceptions. This allows the programmer to react more flexible to the errors. The Spring JDBC template converts also the vendor specific error messages into better understandable error messages.
+
+The Spring JDBC template offers several ways to query the database. queryForList() returns a list of HashMaps. The name of the column is the key in the hashmap for the values in the table. More convenient is the usage of ResultSetExtractor or RowMapper which allows to translates the SQL result direct into an object (ResultSetExtractor) or a list of objects (RowMapper). Both these methods will be demonstrated in the coding.
+
+Q 2	What is a JdbcTemplate?
+
+	The org.springframework.jdbc.core.JdbcTemplate class is the central class in the JDBC core package. It simplifies the use of JDBC and helps to avoid common errors. It executes core JDBC workflow, leaving the application code to provide SQL and extract results. This class executes SQL queries or updates, initiating iteration over ResultSets and catching JDBC exceptions and translating them to the generic, more informative exception hierarchy defined in the org.springframework.dao package.
+	
+	
 Problem 3	What is a RowMapper?
 Problem 4	What is JPA?
 Problem 5	What is Hibernate?
