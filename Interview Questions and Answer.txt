@@ -1163,7 +1163,9 @@ Q 5	What is Hibernate?
 	Hibernate is a Java framework that simplifies the development of Java application to interact with the database. It is an open source, lightweight, ORM (Object Relational Mapping) tool. Hibernate implements the specifications of JPA (Java Persistence API) for data persistence.
 	An ORM tool simplifies the data creation, data manipulation and data access. It is a programming technique that maps the object to the data stored in the database.
 	
-Problem 6	How do you define an entity in JPA?
+Q 6	How do you define an entity in JPA?
+	Entities in JPA are nothing but POJOs representing data that can be persisted to the database. An entity represents a table stored in a database. Every instance of an entity represents a row in the table.
+	
 Problem 7	What is an Entity Manager?
 Problem 8	What is a Persistence Context?
 Problem 9	How do you map relationships in JPA?
