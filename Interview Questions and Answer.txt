@@ -1159,7 +1159,10 @@ The Java Persistence API (JPA) is a specification of Java. It is used to persist
 
 As JPA is just a specification, it doesn't perform any operation by itself. It requires an implementation. So, ORM tools like Hibernate, TopLink and iBatis implements JPA specifications for data persistence.
 
-Problem 5	What is Hibernate?
+Q 5	What is Hibernate?
+	Hibernate is a Java framework that simplifies the development of Java application to interact with the database. It is an open source, lightweight, ORM (Object Relational Mapping) tool. Hibernate implements the specifications of JPA (Java Persistence API) for data persistence.
+	An ORM tool simplifies the data creation, data manipulation and data access. It is a programming technique that maps the object to the data stored in the database.
+	
 Problem 6	How do you define an entity in JPA?
 Problem 7	What is an Entity Manager?
 Problem 8	What is a Persistence Context?
