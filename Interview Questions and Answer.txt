@@ -1136,7 +1136,23 @@ Q 2	What is a JdbcTemplate?
 	The org.springframework.jdbc.core.JdbcTemplate class is the central class in the JDBC core package. It simplifies the use of JDBC and helps to avoid common errors. It executes core JDBC workflow, leaving the application code to provide SQL and extract results. This class executes SQL queries or updates, initiating iteration over ResultSets and catching JDBC exceptions and translating them to the generic, more informative exception hierarchy defined in the org.springframework.dao package.
 	
 	
-Problem 3	What is a RowMapper?
+Q3	What is a RowMapper?
+
+	Like ResultSetExtractor, we can use RowMapper interface to fetch the records from the database using query() method of JdbcTemplate class. In the execute of we need to pass the instance of RowMapper now.
+
+Syntax of query method using RowMapper
+public T query(String sql,RowMapper<T> rm)  
+RowMapper Interface
+RowMapper interface allows to map a row of the relations with the instance of user-defined class. It iterates the ResultSet internally and adds it into the collection. So we don't need to write a lot of code to fetch the records as ResultSetExtractor.
+
+Advantage of RowMapper over ResultSetExtractor
+RowMapper saves a lot of code becuase it internally adds the data of ResultSet into the collection.
+
+Method of RowMapper interface
+It defines only one method mapRow that accepts ResultSet instance and int as the parameter list. Syntax of the method is given below:
+
+public T mapRow(ResultSet rs, int rowNumber)throws SQLException  
+
 Problem 4	What is JPA?
 Problem 5	What is Hibernate?
 Problem 6	How do you define an entity in JPA?
