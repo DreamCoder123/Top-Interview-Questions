@@ -1166,7 +1166,21 @@ Q 5	What is Hibernate?
 Q 6	How do you define an entity in JPA?
 	Entities in JPA are nothing but POJOs representing data that can be persisted to the database. An entity represents a table stored in a database. Every instance of an entity represents a row in the table.
 	
-Problem 7	What is an Entity Manager?
+Q7	What is an Entity Manager?
+	Following are some of the important roles of an entity manager: -
+
+	The entity manager implements the API and encapsulates all of them within a single interface.
+	Entity manager is used to read, delete and write an entity.
+	An object referenced by an entity is managed by entity manager.
+	Steps to persist an entity object.
+	1) Creating an entity manager factory object
+
+	The EntityManagerFactory interface present in java.persistence package is used to provide an entity manager.
+
+	EntityManagerFactory emf=Persistence.createEntityManagerFactory("Student_details");  
+	Persistence - The Persistence is a bootstrap class which is used to obtain an EntityManagerFactory interface.
+	createEntityManagerFactory() method - The role of this method is to create and return an EntityManagerFactory for the named persistence unit. Thus, this 	 method contains the name of persistence unit passed in the Persistence.xml file.
+
 Problem 8	What is a Persistence Context?
 Problem 9	How do you map relationships in JPA?
 Problem 10	What are the different types of relationships in JPA?
