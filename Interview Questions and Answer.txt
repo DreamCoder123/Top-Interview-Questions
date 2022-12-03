@@ -1181,9 +1181,27 @@ Q7	What is an Entity Manager?
 	Persistence - The Persistence is a bootstrap class which is used to obtain an EntityManagerFactory interface.
 	createEntityManagerFactory() method - The role of this method is to create and return an EntityManagerFactory for the named persistence unit. Thus, this 	 method contains the name of persistence unit passed in the Persistence.xml file.
 
-Problem 8	What is a Persistence Context?
-Problem 9	How do you map relationships in JPA?
-Problem 10	What are the different types of relationships in JPA?
+Q 8	What is a Persistence Context?
+
+	An EntityManager instance is associated with a persistence context. A persistence context is a set of entity instances in which for any persistent entity 	 identity there is a unique entity instance. Within the persistence context, the entity instances and their lifecycle are managed. The EntityManager API is used 	to create and remove persistent entity instances, to find entities by their primary key, and to query over entities.
+
+The above statement may seem a bit complex right now, but it will make complete sense as we proceed. The persistence context is the first-level cache where all the entities are fetched from the database or saved to the database. It sits between our application and persistent storage.
+
+Persistence context keeps track of any changes made into a managed entity. If anything changes during a transaction, then the entity is marked as dirty. When the transaction completes, these changes are flushed into persistent storage.
+
+Q9	How do you map relationships in JPA?
+
+	@ManyToOne Relation
+@OneToMany Relation
+@OneToOne Relation
+@ManyToMany Relation
+@ManyToOne Relation
+Many-To-One relation between entities: Where one entity (column or set of columns) is/are referenced with another entity (column or set of columns) which contain unique values. In relational databases these relations are applicable by using foreign key/primary key between tables.
+
+Let us consider an example of relation between Employee and Department entities. In unidirectional manner, i.e.from Employee to Department, Many-To-One relation is applicable. That means each record of employee contains one department id, which should be a primary key in Department table. Here in the Employee table, Department id is foreign Key.
+
+Q 10	What are the different types of relationships in JPA?
+	Same as above
 Problem 11	How do you define One to One Mapping in JPA?
 Problem 12	How do you define One to Many Mapping in JPA?
 Problem 13	How do you define Many to Many Mapping in JPA?
