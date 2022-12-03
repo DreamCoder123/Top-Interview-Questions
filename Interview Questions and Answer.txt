@@ -1153,7 +1153,12 @@ It defines only one method mapRow that accepts ResultSet instance and int as the
 
 public T mapRow(ResultSet rs, int rowNumber)throws SQLException  
 
-Problem 4	What is JPA?
+Q 4	What is JPA?
+
+The Java Persistence API (JPA) is a specification of Java. It is used to persist data between Java object and relational database. JPA acts as a bridge between object-oriented domain models and relational database systems.
+
+As JPA is just a specification, it doesn't perform any operation by itself. It requires an implementation. So, ORM tools like Hibernate, TopLink and iBatis implements JPA specifications for data persistence.
+
 Problem 5	What is Hibernate?
 Problem 6	How do you define an entity in JPA?
 Problem 7	What is an Entity Manager?
