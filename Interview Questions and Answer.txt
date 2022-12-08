@@ -1200,11 +1200,31 @@ Many-To-One relation between entities: Where one entity (column or set of column
 
 Let us consider an example of relation between Employee and Department entities. In unidirectional manner, i.e.from Employee to Department, Many-To-One relation is applicable. That means each record of employee contains one department id, which should be a primary key in Department table. Here in the Employee table, Department id is foreign Key.
 
-Q 10	What are the different types of relationships in JPA?
+Q10	What are the different types of relationships in JPA?
 	Same as above
-Problem 11	How do you define One to One Mapping in JPA?
-Problem 12	How do you define One to Many Mapping in JPA?
-Problem 13	How do you define Many to Many Mapping in JPA?
+Q11	How do you define One to One Mapping in JPA?
+	
+	In JPA One-To-One mapping, a single instance of one entity is associated with another single instance of another entity.
+
+	Basically, a single-valued association is implemented by JPA One-To-One Mapping. For this type of Mapping association, we can only map the source entity to 	    the utmost one instance of the target entity.
+
+Q12	How do you define One to Many Mapping in JPA?
+
+	The One-To-Many mapping comes into the category of collection-valued association where an entity is associated with a collection of other entities. Hence, in this type of association the instance of one entity can be mapped with any number of instances of another entity.
+
+@OneToMany Example
+In this example, we will create a One-To-Many relationship between a Student and Library in such a way that one student can be issued more than one type of book.
+
+This example contains the following steps: -
+
+Create an entity class Student.java under com.javatpoint.mapping package that contains student id (s_id), student name (s_name) with @OneToMany annotation that contains Library class object of List type.
+Q13	How do you define Many to Many Mapping in JPA?
+
+	In JPA we use the @ManyToMany annotation to model many-to-many relationships. This type of relationship can be unidirectional or bidirectional:
+
+In a unidirectional relationship only one entity in the relationship points the other.
+In a bidirectional relationship both entities point to each other.
+
 Problem 14	How do you define a datasource in a Spring Context?
 Problem 15	What is the use of persistence.xml
 Problem 16	How do you configure Entity Manager Factory and
