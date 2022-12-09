@@ -1225,7 +1225,17 @@ Q13	How do you define Many to Many Mapping in JPA?
 In a unidirectional relationship only one entity in the relationship points the other.
 In a bidirectional relationship both entities point to each other.
 
-Problem 14	How do you define a datasource in a Spring Context?
+Q14	How do you define a datasource in a Spring Context?
+		To configure your own DataSource, define a @Bean of that type in your configuration. Spring Boot reuses your DataSource anywhere one is required, including database initialization. If you need to externalize some settings, you can bind your DataSource to the environment (see “Section 25.8.1, “Third-party Configuration””).
+
+The following example shows how to define a data source in a bean:
+
+@Bean
+@ConfigurationProperties(prefix="app.datasource")
+public DataSource dataSource() {
+	return new FancyDataSource();
+}
+
 Problem 15	What is the use of persistence.xml
 Problem 16	How do you configure Entity Manager Factory and
 Transaction Manager?	
