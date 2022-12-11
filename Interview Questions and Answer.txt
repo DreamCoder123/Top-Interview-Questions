@@ -1243,7 +1243,139 @@ Q15	What is the use of persistence.xml
 The persistence.xml file is a standard configuration file in JPA. It has to be included in the META-INF directory inside the JAR file that contains the entity beans. The persistence.xml file must define a persistence-unit with a unique name in the current scoped classloader.
 
 Q16	How do you configure Entity Manager Factory and
-Transaction Manager?	
+	Transaction Manager?	
+	
+	Configuring the Entity Manager Factory Bean
+We can configure the entity manager factory bean by following these steps:
+
+Create a new LocalContainerEntityManagerFactoryBean object. We need to create this object because it creates the JPA EntityManagerFactory.
+Configure the used datasource.
+Configure the Hibernate specific implementation of the JpaVendorAdapter interface. It will initialize our configuration with the default settings that are compatible with Hibernate.
+Configure the packages that are scanned for entity classes.
+Configure the JPA properties that are used to provide additional configuration to the used JPA provider.
+The method that configures the entity manager factory bean looks as follows:
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+@Configuration
+class PersistenceContext {
+ 
+    @Bean
+    LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, 
+                                                                Environment env) {
+        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+        entityManagerFactoryBean.setDataSource(dataSource);
+        entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+        entityManagerFactoryBean.setPackagesToScan("net.petrikainulainen.springdata.jpa.todo");
+ 
+        Properties jpaProperties = new Properties();
+     
+        //Configures the used database dialect. This allows Hibernate to create SQL
+        //that is optimized for the used database.
+        jpaProperties.put("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
+ 
+        //Specifies the action that is invoked to the database when the Hibernate
+        //SessionFactory is created or closed.
+        jpaProperties.put("hibernate.hbm2ddl.auto", 
+                env.getRequiredProperty("hibernate.hbm2ddl.auto")
+        );
+ 
+        //Configures the naming strategy that is used when Hibernate creates
+        //new database objects and schema elements
+        jpaProperties.put("hibernate.ejb.naming_strategy", 
+                env.getRequiredProperty("hibernate.ejb.naming_strategy")
+        );
+ 
+        //If the value of this property is true, Hibernate writes all SQL
+        //statements to the console.
+        jpaProperties.put("hibernate.show_sql", 
+                env.getRequiredProperty("hibernate.show_sql")
+        );
+ 
+        //If the value of this property is true, Hibernate will format the SQL
+        //that is written to the console.
+        jpaProperties.put("hibernate.format_sql", 
+                env.getRequiredProperty("hibernate.format_sql")
+        );
+ 
+        entityManagerFactoryBean.setJpaProperties(jpaProperties);
+ 
+        return entityManagerFactoryBean;
+    }
+     
+    //Add the other beans here
+}
+
+Let’s move on and configure the transaction manager bean.
+
+Configuring the Transaction Manager Bean
+Because we are using JPA, we have to create a transaction manager bean that integrates the JPA provider with the Spring transaction mechanism. We can do this by using the JpaTransactionManager class as the transaction manager of our application.
+
+We can configure the transaction manager bean by following these steps:
+
+Create a new JpaTransactionManager object.
+Configure the entity manager factory whose transactions are managed by the created JpaTransactionManager object.
+The method that configures the transaction manager bean looks as follows:
+
+
+@Configuration
+class PersistenceContext {
+ 
+    @Bean
+    JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(entityManagerFactory);
+        return transactionManager;
+    }
+     
+    //Add the other beans here
+}
 Problem 17	How do you define transaction management for
 Spring – Hibernate integration?	
 Problem 18	What is Spring Data?
