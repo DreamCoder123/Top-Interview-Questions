@@ -1236,8 +1236,13 @@ public DataSource dataSource() {
 	return new FancyDataSource();
 }
 
-Problem 15	What is the use of persistence.xml
-Problem 16	How do you configure Entity Manager Factory and
+Q15	What is the use of persistence.xml
+
+	The persistence.xml file gives you complete flexibility to configure the EntityManager.
+
+The persistence.xml file is a standard configuration file in JPA. It has to be included in the META-INF directory inside the JAR file that contains the entity beans. The persistence.xml file must define a persistence-unit with a unique name in the current scoped classloader.
+
+Q16	How do you configure Entity Manager Factory and
 Transaction Manager?	
 Problem 17	How do you define transaction management for
 Spring – Hibernate integration?	
