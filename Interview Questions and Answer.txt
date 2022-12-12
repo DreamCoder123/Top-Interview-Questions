@@ -1255,54 +1255,6 @@ Configure the packages that are scanned for entity classes.
 Configure the JPA properties that are used to provide additional configuration to the used JPA provider.
 The method that configures the entity manager factory bean looks as follows:
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
 @Configuration
 class PersistenceContext {
  
@@ -1376,8 +1328,48 @@ class PersistenceContext {
      
     //Add the other beans here
 }
-Problem 17	How do you define transaction management for
-Spring – Hibernate integration?	
+
+Q17	How do you define transaction management for Spring – Hibernate integration?
+	
+	What Spring-Hibernate transaction management by Annotation does?
+
+The Spring-Hibernate transaction management by Annotation makes sure :
+
+The transaction operations i.e. amount deposit or withdrawn should be atomic i.e. either of these operations should happen entirely or nothing at all.
+
+The transaction operations trying to access the shared data at the same time, should only be executed in isolation. i.e. one transaction at a time.
+
+In case of any exceptional or erroneous situation taking place(while any of the deposit or withdraw transaction operations were being performed), the effect of these operations should be rolled back to maintain the consistency of data and not leave any anomalous data in the database.
+
+
+
+
+
+How Spring-Hibernate transaction management by Annotation works?
+
+To perform transaction management within the database using Spring Framework with Hibernate and Annotations, we need an access to the source code to edit it and add @Transactional Annotation to class and methods involved in performing the transaction operations.
+
+
+
+
+Note :
+
+Before we proceed with the example of database transaction management, we would first need to configure Spring Framework to work with Hibernate. To perform this, we will use a very important template class provided by Spring Framework, named - HibernateTemplate, which provides different methods for querying and retrieving data from the database.
+
+
+
+
+Creating the Java class - Customer_Account
+
+We are going to create a java class named Customer_Account within the decodejava package and this class contains -
+An int property named id.
+A String property named name.
+A String property named address.
+A String property named age.
+This class and its properties will be annotated with @Entity, @Table, @Id, @Column, @GeneratedValue annotations, which allow us to create a database table with a primary key id and columns without using a mapping resource xml file. For those who are unaware of these Hibernate Annotations, please read our article Hibernate with Annotations.
+
+Besides this, we are also going to define a couple of getter and setter methods within this class to set the above mentioned properties of Customer class.
+
 Problem 18	What is Spring Data?
 Problem 19	What is the need for Spring Data?
 Problem 20	What is Spring Data JPA?
