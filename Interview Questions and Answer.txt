@@ -1420,6 +1420,8 @@ Spring Data for VMware Tanzu GemFire - Easy configuration and access to Pivotal 
 
 
 Problem 19	What is the need for Spring Data?
+
+
 Problem 20	What is Spring Data JPA?
 Problem 21	What is a CrudRepository?
 Problem 22	What is a PagingAndSortingRepository?
