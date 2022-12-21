@@ -1436,7 +1436,24 @@ OpenJPA etc.
 Advantage of Spring JpaTemplate
 You don't need to write the before and after code for persisting, updating, deleting or searching object such as creating Persistence instance, creating EntityManagerFactory instance, creating EntityTransaction instance, creating EntityManager instance, commiting EntityTransaction instance and closing EntityManager.
 
-Problem 21	What is a CrudRepository?
+Q21	What is a CrudRepository?
+	CrudRepository and JPA repository both are the interface of the spring data repository library. Spring data repository reduces the boilerplate code by providing some predefined finders to access the data layer for various persistence layers.
+
+JPA repository extends CrudRepository and PagingAndSorting repository. It inherits some finders from crud repository such as findOne, gets and removes an entity. It also provides some extra methods related to JPA such as delete records in batch, flushing data directly to a database base and methods related to pagination and sorting.
+
+We need to extend this repository in our application and then we can access all methods which are available in these repositories. We can also add new methods using named or native queries based on business requirements.
+
+Example of JpaRepository
+@Repository
+public interface BookDAO extends JpaRepository {
+   Book findByAuthor(@Param("id") Integer id);
+}
+Example of CrudRepository
+@Repository
+public interface BookDAO extends CrudRepository {
+   Book Event findById(@Param("id") Integer id);
+}
+
 Problem 22	What is a PagingAndSortingRepository?
 Notes
 
