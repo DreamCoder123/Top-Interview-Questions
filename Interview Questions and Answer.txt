@@ -1419,10 +1419,23 @@ Spring Data for Apache Geode - Easy configuration and access to Apache Geode for
 Spring Data for VMware Tanzu GemFire - Easy configuration and access to Pivotal GemFire for your highly consistent, low latency/high through-put, data-oriented Spring applications.
 
 
-Problem 19	What is the need for Spring Data?
+Q19	What is the need for Spring Data?
+		Same as previous.
 
+Q20	What is Spring Data JPA?
+	Spring Data JPA API provides JpaTemplate class to integrate spring application with JPA.
 
-Problem 20	What is Spring Data JPA?
+JPA (Java Persistent API) is the sun specification for persisting objects in the enterprise application. It is currently used as the replacement for complex entity beans.
+
+The implementation of JPA specification are provided by many vendors such as:
+
+Hibernate
+Toplink
+iBatis
+OpenJPA etc.
+Advantage of Spring JpaTemplate
+You don't need to write the before and after code for persisting, updating, deleting or searching object such as creating Persistence instance, creating EntityManagerFactory instance, creating EntityTransaction instance, creating EntityManager instance, commiting EntityTransaction instance and closing EntityManager.
+
 Problem 21	What is a CrudRepository?
 Problem 22	What is a PagingAndSortingRepository?
 Notes
