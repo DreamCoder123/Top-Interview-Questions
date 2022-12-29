@@ -1475,8 +1475,153 @@ Exceptional Handling & Versioning
 Problem	Questions
 Problem 1	How do you implement Exception Handling for
 RESTFul Web Services?	
-Problem 2	What are the different error status that you would
-return in RESTful Web Services?	
+1. Create handler with @ControllerAdvice and @ExceptionHandler
+@ControllerAdvice annotation is specialization of @Component annotation and it’s methods (annotated with @ExceptionHandler) are shared across multiple @Controller classes, globally.
+Classes with @ControllerAdvice are auto-detected via classpath scanning.
+Use selectors annotations(), basePackageClasses(), and basePackages() to define a more narrow subset of targeted controllers.
+We can apply OR operator in selector i.e. a given method would be executed if any one of given exception is encountered.
+Please note that ResponseEntityExceptionHandler is a convenient base class for @ControllerAdvice classes that wish to provide centralized exception handling across all @RequestMapping methods through @ExceptionHandler methods.
+
+import java.util.ArrayList;
+import java.util.List;
+ 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+ 
+@ControllerAdvice
+public class CustomExceptionHandler extends ResponseEntityExceptionHandler 
+{
+  private String INCORRECT_REQUEST = "INCORRECT_REQUEST";
+  private String BAD_REQUEST = "BAD_REQUEST";
+   
+  @ExceptionHandler(RecordNotFoundException.class)
+  public final ResponseEntity<ErrorResponse> handleUserNotFoundException
+            (RecordNotFoundException ex, WebRequest request) 
+  {
+    List<String> details = new ArrayList<>();
+    details.add(ex.getLocalizedMessage());
+    ErrorResponse error = new ErrorResponse(INCORRECT_REQUEST, details);
+    return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+  }
+   
+  @ExceptionHandler(MissingHeaderInfoException.class)
+  public final ResponseEntity<ErrorResponse> handleInvalidTraceIdException
+            (MissingHeaderInfoException ex, WebRequest request) {
+    List<String> details = new ArrayList<>();
+    details.add(ex.getLocalizedMessage());
+    ErrorResponse error = new ErrorResponse(BAD_REQUEST, details);
+    return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+  }
+}
+
+
+2. Create exception model classes
+We need to identify the business exception usecases and denote them with exception classes. These classes will extend the RuntimeException class. Also feel free to create more representations of error responses, as per requirements.
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+ 
+@ResponseStatus(HttpStatus.BAD_REQUEST)
+public class MissingHeaderInfoException extends RuntimeException
+{
+  private static final long serialVersionUID = 1L;
+ 
+  public MissingHeaderInfoException(String message) {
+        super(message);
+    }
+}
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+ 
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class RecordNotFoundException extends RuntimeException
+{
+  private static final long serialVersionUID = 1L;
+ 
+  public RecordNotFoundException(String message) {
+        super(message);
+    }
+}
+import java.util.List;
+ 
+public class ErrorResponse
+{
+    public ErrorResponse(String message, List<String> details) {
+        super();
+        this.message = message;
+        this.details = details;
+    }
+  
+    private String message;
+    private List<String> details;
+ 
+  //getters and setters
+}
+3. Configure view resolver
+If not done already, we need to configure the view resolver to convert the exception messages to XML or JSON form.
+
+In Spring boot, this configuration is done automatically. Without spring boot, we need to do it like below.
+
+Important: Make sure we you have mvc:annotation-driven configuration enabled or used @EnableWebMvc annotation.
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:mvc="http://www.springframework.org/schema/mvc"
+  xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+  http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/context/
+  http://www.springframework.org/schema/context/spring-context.xsd
+  http://www.springframework.org/schema/data/jpa/ 
+    http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd
+    http://www.springframework.org/schema/tx/ 
+    http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+  http://www.springframework.org/schema/mvc/
+  http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+ 
+  <mvc:annotation-driven />
+ 
+  <context:component-scan base-package="com.howtodoinjava.demo" />
+   
+  <mvc:view-resolvers>
+        <mvc:content-negotiation>
+            <mvc:default-views>
+                <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+            </mvc:default-views>
+        </mvc:content-negotiation>
+    </mvc:view-resolvers>
+   
+  <!-- JPA Config -->
+</beans>
+4. REST controller changes
+From rest controller handler method, we need to throw the exception which we want to convert and send as response to API consumer. In this case, we are sending RecordNotFoundException in case an employee is searched by id and it does not exist in the database.
+
+@GetMapping("/employees/{id}")
+Employee getEmployeeById(@PathVariable Long id) 
+{
+  return repository.findById(id)
+      .orElseThrow(() -> new RecordNotFoundException("Employee id '" + id + "' does no exist"));
+}
+5. Spring REST Exception Handling Demo
+Try to get an employee by id where id does not exist in database.
+
+HTTP GET : http://localhost:8080/SpringRestExample/api/rest/employee-management/employees/101
+{
+  "message": "INCORRECT_REQUEST",
+  "details": [
+      "Employee id '101' does no exist"
+  ],
+}
+Drop me your questions related exception handling in spring rest apis.
+
+Happy Learning !!
+
+Problem 2	What are the different error status that you would return in RESTful Web Services?	
 Problem 3	How would you implement them using Spring Boot?
 Problem 4	How do you handle Validation Errors with RESTful
 Web Services?	
