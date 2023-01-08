@@ -1999,8 +1999,313 @@ We can further customize the exception by following the BindingResult interface.
 
 Implementing Validations for RESTful Services
 
-Problem 5	Why do we need Versioning for RESTful Web
-Services?	
+Problem 5	Why do we need Versioning for RESTful Web Services?	
+
+Versioning is the most important and difficult part of the API as it takes backward API compatible. Versioning helps us to iterate faster when the changes are identified. We should always version our Web API.
+
+Consider a scenario in which we have a Web API that is up (status) and running. The users are consuming that API. Now we want to add more functionality in the Web API but want to keep the existing functionality unchanged. There may be few users who still want to use the old API while the other users want a new version of API with new or extended features. It is the scenario where Web API versioning comes into existence.
+
+When we required versioning:
+When we made a breaking change in Web API, we should up versioned the API. Breaking changes includes:
+
+A change in the format of the response data for one or more calls.
+Change in the response type.
+Remove any part of the API.
+Breaking changes should always result in a change to the major version number for an API or content response type.
+Play Video
+
+Non-breaking changes (adding new points or new response parameters) do not require a change to the major version number. However, it can be helpful to track the minor version of the APIs.
+
+How to Version
+The most commonly used approaches fall into three categories:
+
+URI Versioning
+Versioning using Custom Request Header
+Versioning using Accept Header
+URI Versioning
+URI versioning is the most straightforward approach. It specified in the URL as a query string. It violates the principle that a URI should refer to a unique resource. You are also guaranteed to break client integration when a version is updated. Twitter uses URI versioning.
+
+Example
+
+http://api.demo.com/v1
+http://apiv1.demo.com
+
+The version need not be numeric, nor specified using v[x] syntax. Alternatives include the date, project name, season, or other identifiers that are meaningful enough to change as the version change.
+
+Versioning using Custom Request Header
+A custom header allows us to preserve our URLs. It is a duplicate of the content negotiation behavior implemented by the existing Accept header. Version information is specified in the Request Header without the need for any change in the URL. Microsoft uses the request header versioning. The user cannot access request header versioning in the normal browser (chrome). We are required a special plugin to access them on the browser.
+
+Example
+
+
+Accept-version: v1
+Accept-version: v2
+
+Versioning using Accept Header
+Accept header define the media type and character encodings. We can also pass version information for Web API through accept headers without changing the URL. It is also known as media type versioning or content negotiation or accept header. Github uses the accept header versioning. The user cannot access accept-header versioning in the normal browser (chrome). We are required a special plugin to access them on the browser.
+
+Example
+
+Accept: application/vnd.demo.v1+json Accept:application/vnd.demo+json;version=1.0
+
+Let's see how to implement versioning in the project.
+
+
+URI Versioning
+Step 1: Create a class with the name PersonV1.java in the package com.javatpoint.server.main.versioning. PersonV1 denotes the first version of API. The initial version of API has a name variable.
+
+PersonV1.java
+
+package com.javatpoint.server.main.versioning;  
+public class PersonV1   
+{  
+private String name;  
+}  
+Step 2: Over a period, we recognize the need for having the first name and last name separately. So we created a class with the name Person2.java. It denotes the second version of API.
+
+
+PersonV2.java
+
+package com.javatpoint.server.main.versioning;  
+public class PersonV2   
+{  
+private Name name;  
+}  
+Step 3: Create a class with the name Name.java that has two variables firstName and lastName separately.
+
+Name.java
+
+package com.javatpoint.server.main.versioning;  
+public class Name   
+{  
+private String firstName;  
+private String lastName;  
+}  
+The old version is still returning the full name, and the second version is returning firstName and lastName separately. Now we are required to create two different versions of the same service.
+
+Let's see how to create two different versions of the same service and what are the different versions of the service are present.
+
+Step 4: In the Name.java file, Generate Getters and Setters, Generate Constructor using Fields. Create a no-argument constructor of the class Name.
+
+Name.java
+
+package com.javatpoint.server.main.versioning;  
+public class Name   
+{  
+private String firstName;  
+private String lastName;  
+//no argument constructor  
+public Name()   
+{  
+  
+}  
+public Name(String firstName, String lastName)   
+{  
+super();  
+this.firstName = firstName;  
+this.lastName = lastName;  
+}  
+public String getFirstName()   
+{  
+return firstName;  
+}  
+public void setFirstName(String firstName)   
+{  
+this.firstName = firstName;  
+}  
+public String getLastName()   
+{  
+return lastName;  
+}  
+public void setLastName(String lastName)   
+{  
+this.lastName = lastName;  
+}  
+}  
+Step 5: Open PersonV1.java class. Generate Getters and Setters, Generate Constructor using Fields. Create a no argument constructor of the class PersonV1.java.
+
+PersonV1.java
+
+
+package com.javatpoint.server.main.versioning;  
+public class PersonV1   
+{  
+private String name;  
+//no argument constructor  
+public PersonV1()   
+{  
+super();      
+}  
+public PersonV1(String name)   
+{  
+super();  
+this.name = name;  
+}  
+public String getName()   
+{  
+return name;  
+}  
+public void setName(String name)   
+{  
+this.name = name;  
+}  
+}  
+Step 6: Open PersonV2.java. Generate Getters and Setters, Generate Constructor using Fields. Create a no argument constructor of the class PersonV2.java.
+
+PersonV2.java
+
+package com.javatpoint.server.main.versioning;  
+public class PersonV2   
+{  
+private Name name;  
+public PersonV2()   
+{  
+super();  
+}  
+public PersonV2(Name name)   
+{  
+super();  
+this.name = name;  
+}  
+public Name getName()   
+{  
+return name;  
+}  
+public void setName(Name name)   
+{  
+this.name = name;  
+}  
+}  
+Now we need to create a service.
+
+Step 7: Create a class with the name PersonVersioningController.java. Create two methods for different versions and map them to different URIs.
+
+PersonVersioningController.java
+
+package com.javatpoint.server.main.versioning;  
+import org.springframework.web.bind.annotation.RestController;  
+import org.springframework.web.bind.annotation.GetMapping;  
+@RestController  
+public class PersonVersoningController   
+{  
+//this method is for the first version that returns the entire name  
+@GetMapping("v1/person")  
+public PersonV1 personv1()  
+{  
+return new PersonV1("Tom Cruise");  
+}  
+//this method is for the second version that returns firstName and lastName separately  
+@GetMapping("v2/person")  
+public PersonV2 personv2()  
+{  
+return new PersonV2(new Name("Tom", "Cruise"));  
+}  
+}  
+Step 8: Open the Postman and send a GET request with the URI http://localhost:8080/v1/person. It returns the full name, as shown in the following image.
+
+Versioning RESTful Web Services-Basic Approach With URIs
+Change the URI http://localhost:8080/v2/person for the second version. It returns the firstName and lastName separately, as shown in the following image.
+
+Versioning RESTful Web Services-Basic Approach With URIs
+Versioning using Request Parameter
+Another way to implement versioning is by using the request parameter. Amazon uses the request parameter versioning. Open the PersonVersioningController.java and do the following changes:
+
+Change the URI for the first method from /v1/person to /person/param.
+Change the name of the method from personV1 to paramV1.
+Similarly, change the URI for the second method from /v2/person to /person/param.
+Both the methods have the same get mapping, so we will distinguish them by using the value and params attribute. The value attribute contains the URI, which we want to use, and the params attribute contains the parameter which distinguishes between versions.
+
+PersonVersoningController.java
+
+package com.javatpoint.server.main.versioning;  
+import org.springframework.web.bind.annotation.GetMapping;  
+import org.springframework.web.bind.annotation.RestController;  
+@RestController  
+public class PersonVersoningController   
+{  
+//this method is for first version that returns the entire name  
+@GetMapping(value="/person/param", params="version=1")  
+public PersonV1 personV1()  
+{  
+return new PersonV1("Tom Cruise");  
+}  
+//this method is for second version that returns firstName and lastName separately  
+@GetMapping(value="/person/param", params="version=2")  
+public PersonV2 personV2()  
+{  
+return  new PersonV2(new Name("Tom", "Cruise"));  
+}  
+}  
+Now, move to Postman and send a GET request with the URI http://localhost:8080/person/param?version=1. It returns the full name, as shown in the following image.
+
+Versioning RESTful Web Services-Basic Approach With URIs
+Again, generate a GET request with the URI http://localhost:8080/person/param?version=2 to access the second version. It returns the firstName and lastName separately, as shown in the following image.
+
+Versioning RESTful Web Services-Basic Approach With URIs
+Versioning using Request Header
+There is another option to do versioning using the Request Header. It is similar to content negotiation. In this method, we differentiate service based on the Request Header.
+
+In the PersonVersioningController.java, do the following:
+
+Copy both the methods and paste in the same file.
+Change the method name paramV1 to headerV1 and paramV2 to headerV2.
+Replace the URI /person/param with /person/header and params with headers.
+/*---------------using request header--------------*/  
+//this method is for first version that returns the entire name  
+@GetMapping(value="/person/header", headers="X-API-Version=1")  
+public PersonV1 headerV1()  
+{  
+return new PersonV1("Tom Cruise");  
+}  
+//this method is for second version that returns firstName and lastName separately  
+@GetMapping(value="/person/header", headers="X-API-Version=2")  
+public PersonV2 headerV2()  
+{  
+return new PersonV2(new Name("Tom", "Cruise"));  
+}  
+Open the Postman:
+
+Select the Headers tab and set key: X-API-VERSION and Value: 1.
+Type the URI http://localhost:8080/person/header and send a GET request.
+It returns the name full name.
+
+Versioning RESTful Web Services-Basic Approach With URIs
+Let's send a GET request for version 2. For this, we need to change the value from 1 to 2 under the Headers tab. It returns the firstName and lastName separately.
+
+Versioning RESTful Web Services-Basic Approach With URIs
+Versioning using Accept Header
+Another method that is used in versioning is the Accept Header. It is also known as Content Negotiation or Accept Versioning. In this method, we use an attribute called produce. It denotes what kind of output we are generating for the specific service.
+
+In the PersonVersioningController.java file, do the following:
+
+Copy both the methods and paste in the same file.
+Change the methods name headerV1 to producesV1 and headerV2 to ProducesV2.
+Replace the URI /person/header with /person/produces and header with produces.
+/*---------------using accept header--------------*/  
+//this method is for first version that returns the entire name  
+@GetMapping(value="/person/produces", produces="application/vnd.company.app-v1+json")  
+public PersonV1 producesV1()  
+{  
+return new PersonV1("Tom Cruise");  
+}  
+//this method is for second version that returns firstName and lastName separately  
+@GetMapping(value="/person/produces", produces="application/vnd.company.app-v2+json")  
+public PersonV2 producesV2()  
+{  
+return  new PersonV2(new Name("Tom", "Cruise"));  
+}  
+Open the Postman:
+
+Select the Headers tab and set key: Accept and Value: application/vnd.company.app-v1+json.
+Uncheck the X-API-VERSION key.
+Type the URI http://localhost:8080/person/produces and send a GET request.
+It returns the full name.
+
+Versioning RESTful Web Services-Basic Approach With URIs
+Let's send a GET request for version 2. For this we need to change the value from Value: application/vnd.company.app-v1+json to Value: application/vnd.company.app-v2+json.
+
+It returns the firstName and lastName separately.
+
 Problem 6	What are the versioning options that are available?
 Problem 7	How do you implement Versioning for RESTful Web
 Services?
