@@ -52,6 +52,7 @@ Simply put, this allows for loose coupling of components and moves the responsib
 Example Car Class might need a reference to an Engine class . These required classe are called dependencies and in the example the car class is dependent on having an instance of the  engine class to run.
 
 6) What is Auto Wiring?
+
 Autowiring feature of spring framework enables you to inject the object dependency implicitly. It internally uses setter or constructor injection.
 Autowiring can't be used to inject primitive and string values. It works with reference only.
 1)	no:-		It is the default autowiring mode. It means no autowiring bydefault.
