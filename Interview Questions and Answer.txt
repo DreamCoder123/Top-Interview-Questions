@@ -44,6 +44,7 @@ dependency class directly, and then uses(call) its methods, it is called the dep
 But if some external entity is taking care of creating the dependency object then we say that control is inverted to some external entity, this is called Inversion of Control (IOC).
 
 4) What is Dependency Injection?
+
 Dependency Injection is a fundamental aspect of the Spring framework, through which the Spring container “injects” objects into other objects or “dependencies”.
 
 Simply put, this allows for loose coupling of components and moves the responsibility of managing components onto the container.
